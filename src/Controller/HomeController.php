@@ -12,7 +12,7 @@ class HomeController extends AbstractController {
     #[Route("/", name: "home")]//chaque page correspond a une route donc par exemple ici c'est notre page principale
     function index(Request $request): Response {
 
-        return new Response('Bienvenue sur Agora');
+        return $this->render('home/index.html.twig');
     }
 
 }
