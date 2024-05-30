@@ -1,4 +1,8 @@
-# Projet Agora
+<div style="display: flex; align-items: center; justify-content: space-between;">
+  <h1 style="margin: 0;">Projet Agora</h1>
+  <img src="documentation/teckel.gif" alt="Teckel" style="height: 5em;">
+</div>
+
 
 ## Outils nécessaires
 
