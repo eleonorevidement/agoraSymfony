@@ -13,20 +13,28 @@
                     <a class="nav-link" href="/">Accueil</a>
                 </li>
                 <li class="nav-item">
+                    {% if is_granted('ROLE_ADMIN') %}
 
                     <a class="nav-link" href="http://localhost:8000/user/">Utilisateurs</a>
+                    {% endif %}
                 </li>
                 <li class="nav-item">
 
                     <a class="nav-link" href="http://localhost:8000/item/">Catalogue</a>
                 </li>
                 <li class="nav-item">
-                    {#todo : modifier lien href#}
+
+                    {% if is_granted('ROLE_USER') %}
+
                     <a class="nav-link" href="http://localhost:8000/cart">Panier</a>
+                    {% endif %}
                 </li>
                 <li class="nav-item">
-                    {#todo : modifier lien href#}
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
                     <a class="nav-link" href="http://localhost:8000/account">Mon compte</a>
+                    {% endif %}
                 </li>
 
 

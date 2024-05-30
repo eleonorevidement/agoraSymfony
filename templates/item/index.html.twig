@@ -26,7 +26,9 @@
                 <td>{{ item.category }}</td>
                 <td>
                     <a href="{{ path('app_item_show', {'id': item.id}) }}">show</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_item_edit', {'id': item.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -36,6 +38,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_item_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

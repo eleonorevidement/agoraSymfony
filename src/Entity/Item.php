@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ItemRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Contracts\Cache\ItemInterface;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
 class Item
@@ -25,6 +26,9 @@ class Item
 
     #[ORM\Column]
     private ?int $category = null;
+
+    #[ORM\ManyToOne(inversedBy: 'items')]
+    private ?User $createdBy = null;
 
     public function getId(): ?int
     {

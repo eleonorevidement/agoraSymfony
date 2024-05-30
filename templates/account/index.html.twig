@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Account{% endblock %}
+
+{% block body %}
+    <h2>User Account</h2>
+    {% if user.profilePicture %}
+        <div>
+            <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePicture) }}" alt="Profile Picture">
+        </div>
+    {% endif %}
+    <div>
+        <strong>Email:</strong> {{ user.email }}
+    </div>
+    <div>
+        <strong>First Name:</strong> {{ user.firstName }}
+    </div>
+    <div>
+        <strong>Last Name:</strong> {{ user.lastName }}
+    </div>
+
+
+{% endblock %}

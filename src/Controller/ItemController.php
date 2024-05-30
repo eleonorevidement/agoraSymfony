@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/item')]
 class ItemController extends AbstractController
@@ -22,7 +23,10 @@ class ItemController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_item_new', methods: ['GET', 'POST'])]
+    #[
+        Route('/new', name: 'app_item_new', methods: ['GET', 'POST']),
+        IsGranted("ROLE_ADMIN")
+    ]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $item = new Item();
@@ -50,7 +54,10 @@ class ItemController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_item_edit', methods: ['GET', 'POST'])]
+    #[
+        Route('/{id}/edit', name: 'app_item_edit', methods: ['GET', 'POST']),
+        IsGranted("ROLE_ADMIN")
+    ]
     public function edit(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ItemType::class, $item);
@@ -68,7 +75,10 @@ class ItemController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_item_delete', methods: ['POST'])]
+    #[
+        Route('/{id}', name: 'app_item_delete', methods: ['POST']),
+        IsGranted("ROLE_ADMIN")
+    ]
     public function delete(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$item->getId(), $request->getPayload()->get('_token'))) {
