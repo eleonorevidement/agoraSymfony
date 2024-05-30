@@ -46,13 +46,6 @@ class UserFixture extends Fixture implements FixtureGroupInterface
         $manager->persist($admin3);
         $manager->persist($admin4);
 
-        #vendeurs
-        $seller = new User();
-        $seller->setEmail('seller@gmail.com');
-        $seller->setFirstName('Seller');
-        $seller->setLastName('User');
-        $seller->setPassword($this->hasher->hashPassword($seller, 'agora'));
-        $seller->setRoles(['ROLE_SELLER']);
 
         #clients
         for ($i = 0; $i < 5; $i++) {
