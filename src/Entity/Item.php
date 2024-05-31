@@ -30,6 +30,12 @@ class Item
     #[ORM\ManyToOne(inversedBy: 'items')]
     private ?User $createdBy = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photo = null;
+
+    #[ORM\ManyToOne(inversedBy: 'createdobjects')]
+    private ?User $creator = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,4 +88,34 @@ class Item
 
         return $this;
     }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): static
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(name="creator_id", referencedColumnName="id", nullable=false)
+     */
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?User $creator): static
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
 }

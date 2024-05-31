@@ -53,9 +53,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'createdBy')]
     private Collection $items;
 
+    /**
+     * @var Collection<int, Item>
+     */
+    #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'creator')]
+    private Collection $createdobjects;
+
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
+        $this->createdobjects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,13 +90,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
+     * @return list<string>
      * @see UserInterface
      *
-     * @return list<string>
      */
     public function getRoles(): array
     {
@@ -210,4 +218,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Item>
+     */
+    public function getCreatedobjects(): Collection
+    {
+        return $this->createdobjects;
+    }
+
+    public function addCreatedobject(Item $createdobject): static
+    {
+        if (!$this->createdobjects->contains($createdobject)) {
+            $this->createdobjects->add($createdobject);
+            $createdobject->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatedobject(Item $createdobject): static
+    {
+        if ($this->createdobjects->removeElement($createdobject)) {
+            // set the owning side to null (unless already changed)
+            if ($createdobject->getCreator() === $this) {
+                $createdobject->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

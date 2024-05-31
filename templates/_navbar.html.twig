@@ -23,8 +23,14 @@
                     <a class="nav-link" href="http://localhost:8000/item/">Catalogue</a>
                 </li>
                 <li class="nav-item">
+                    {% if is_granted('ROLE_SELLER') %}
 
-                    {% if is_granted('ROLE_USER') %}
+                    <a class="nav-link" href="http://localhost:8000/my_item">Mes Objets</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+
+                    {% if is_granted('ROLE_USER') and not is_granted('ROLE_SELLER') and not is_granted('ROLE_ADMIN') %}
 
                     <a class="nav-link" href="http://localhost:8000/cart">Panier</a>
                     {% endif %}

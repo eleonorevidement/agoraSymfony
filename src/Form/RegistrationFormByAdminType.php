@@ -21,6 +21,7 @@ class RegistrationFormByAdminType extends AbstractType
             ->add('email')
             ->add('firstName')
             ->add('lastName')
+            ->add('profilePicture')
 
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
