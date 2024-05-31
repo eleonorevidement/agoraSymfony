@@ -2,22 +2,110 @@
 
 {% block title %}User Account{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            margin: 0;
+            padding: 0;
+        }
+
+        .user-account-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .user-account {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-picture {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .user-info div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .user-info div strong {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .footer {
+            background-color: dimgrey;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h2>User Account</h2>
-    {% if user.profilePicture %}
-        <div>
-            <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePicture) }}" alt="Profile Picture">
+    <div class="user-account-container">
+        <div class="user-account">
+            <h2>User Account</h2>
+            {% if user.profilePicture %}
+                <div class="profile-picture">
+                    <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePicture) }}" alt="Profile Picture">
+                </div>
+            {% else %}
+                <div class="profile-picture">
+                    <img src="{{ asset('img/profilePicture.png') }}" alt="Default Profile Picture">
+                </div>
+            {% endif %}
+            <div class="user-info">
+                <div>
+                    <strong>Email:</strong>
+                    <span>{{ user.email }}</span>
+                </div>
+                <div>
+                    <strong>First Name:</strong>
+                    <span>{{ user.firstName }}</span>
+                </div>
+                <div>
+                    <strong>Last Name:</strong>
+                    <span>{{ user.lastName }}</span>
+                </div>
+            </div>
         </div>
-    {% endif %}
-    <div>
-        <strong>Email:</strong> {{ user.email }}
-    </div>
-    <div>
-        <strong>First Name:</strong> {{ user.firstName }}
-    </div>
-    <div>
-        <strong>Last Name:</strong> {{ user.lastName }}
     </div>
 
-
+    <div class="footer">
+        <p>&copy; 2024 Agora. Tous droits réservés.</p>
+    </div>
 {% endblock %}
