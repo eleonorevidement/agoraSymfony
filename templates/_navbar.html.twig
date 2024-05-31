@@ -1,5 +1,37 @@
 {# fixed-top #}
-<nav class="navbar navbar-expand-lg bg-light mb-5">
+
+<style>
+    .navbar {
+        background-color: #0f263e;
+        padding: 20px;
+    }
+
+    .nav-link {
+        color: #ffe3d1;
+        font-size: 20px;
+    }
+
+    .nav-link:hover {
+        color: #fd8335;
+    }
+
+    .btn {
+        color: #ffe3d1;
+        border: solid 1px #ffe3d1;
+    }
+
+    .btn:hover {
+        color: #0f263e;
+        border: solid 1px #fd8335;
+        background-color: #fd8335;
+    }
+
+    .email {
+        color: #ffe3d1;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg mb-5">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
             <img class="logo" src="{{ asset('img/logo.png') }}" height="50">
@@ -52,8 +84,8 @@
                     <a class="btn btn-outline-secondary" role="button" href="/register">S'inscrire</a>
                     <a class="btn btn-secondary" href="/login">Se connecter</a>
                 {% else %}
-                    <em>{{ app.user.userIdentifier }}</em>
-                    <a class="btn btn-outline-secondary" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    <em class="email">{{ app.user.userIdentifier }}</em>
+                    <a class="btn" href="{{ path('app_logout') }}">Se déconnecter</a>
                 {% endif %}
 			</span>
         </div>
