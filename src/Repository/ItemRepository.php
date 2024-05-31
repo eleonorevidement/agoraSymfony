@@ -16,16 +16,6 @@ class ItemRepository extends ServiceEntityRepository
         parent::__construct($registry, Item::class);
     }
 
-    public function findByCreator($creatorId)
-    {
-        return $this->createQueryBuilder('i')
-            ->where('i.creator = :creatorId')
-            ->setParameter('creatorId', $creatorId)
-            ->getQuery()
-            ->getResult();
-    }
-
-
 
     //    /**
     //     * @return Item[] Returns an array of Item objects

@@ -25,7 +25,7 @@
                 <li class="nav-item">
                     {% if is_granted('ROLE_SELLER') %}
 
-                    <a class="nav-link" href="http://localhost:8000/my_item">Mes Objets</a>
+                    <a class="nav-link" href="{{ path('app_my_items_index') }}">Mes Objets</a>
                     {% endif %}
                 </li>
                 <li class="nav-item">
@@ -39,7 +39,7 @@
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-                    <a class="nav-link" href="http://localhost:8000/account">Mon compte</a>
+                    <a class="nav-link" href="{{ path('app_account') }}">Mon compte</a>
                     {% endif %}
                 </li>
 

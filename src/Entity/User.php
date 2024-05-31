@@ -50,20 +50,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Item>
      */
-    #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'createdBy')]
-    private Collection $items;
-
-    /**
-     * @var Collection<int, Item>
-     */
-    #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'creator')]
-    private Collection $createdobjects;
+    #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'seller')]
+    private Collection $itemsToSell;
 
 
     public function __construct()
     {
-        $this->items = new ArrayCollection();
-        $this->createdobjects = new ArrayCollection();
+        $this->itemsToSell = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -192,57 +185,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Item>
      */
-    public function getItems(): Collection
+    public function getItemsToSell(): Collection
     {
-        return $this->items;
+        return $this->itemsToSell;
     }
 
-    public function addItem(Item $item): static
+    public function addItemsToSell(Item $itemsToSell): static
     {
-        if (!$this->items->contains($item)) {
-            $this->items->add($item);
-            $item->setCreatedBy($this);
+        if (!$this->itemsToSell->contains($itemsToSell)) {
+            $this->itemsToSell->add($itemsToSell);
+            $itemsToSell->setSeller($this);
         }
 
         return $this;
     }
 
-    public function removeItem(Item $item): static
+    public function removeItemsToSell(Item $itemsToSell): static
     {
-        if ($this->items->removeElement($item)) {
+        if ($this->itemsToSell->removeElement($itemsToSell)) {
             // set the owning side to null (unless already changed)
-            if ($item->getCreatedBy() === $this) {
-                $item->setCreatedBy(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Item>
-     */
-    public function getCreatedobjects(): Collection
-    {
-        return $this->createdobjects;
-    }
-
-    public function addCreatedobject(Item $createdobject): static
-    {
-        if (!$this->createdobjects->contains($createdobject)) {
-            $this->createdobjects->add($createdobject);
-            $createdobject->setCreator($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCreatedobject(Item $createdobject): static
-    {
-        if ($this->createdobjects->removeElement($createdobject)) {
-            // set the owning side to null (unless already changed)
-            if ($createdobject->getCreator() === $this) {
-                $createdobject->setCreator(null);
+            if ($itemsToSell->getSeller() === $this) {
+                $itemsToSell->setSeller(null);
             }
         }
 

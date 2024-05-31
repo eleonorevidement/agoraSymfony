@@ -7,14 +7,14 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for item in items %}
@@ -26,8 +26,8 @@
                 <td>{{ item.category }}</td>
                 <td>
                     <a href="{{ path('app_item_show', {'id': item.id}) }}">show</a>
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_item_edit', {'id': item.id}) }}">edit</a>
+                    {% if is_granted('ROLE_ADMIN') or app.user == item.seller and app.user != null %}
+                        <a href="{{ path('app_item_edit', {'id': item.id}) }}">edit</a>
                     {% endif %}
                 </td>
             </tr>
@@ -38,7 +38,7 @@
         {% endfor %}
         </tbody>
     </table>
-    {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_item_new') }}">Create new</a>
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SELLER') %}
+        <a href="{{ path('app_item_new') }}">Create new</a>
     {% endif %}
 {% endblock %}

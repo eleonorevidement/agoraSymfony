@@ -24,17 +24,30 @@ class ItemController extends AbstractController
         ]);
     }
 
-    #[
-        Route('/new', name: 'app_item_new', methods: ['GET', 'POST']),
-        IsGranted("ROLE_ADMIN")
-    ]
+    #[Route('/myItems', name: 'app_my_items_index', methods: ['GET'])]
+    #[IsGranted('ROLE_SELLER')]
+    public function indexForSeller(ItemRepository $itemRepository): Response
+    {
+        $seller = $this->getUser();
+        return $this->render('item/index.html.twig', [
+            'items' => $itemRepository->findBy([
+                'seller' => $seller
+            ]),
+        ]);
+    }
+
+    #[Route('/new', name: 'app_item_new', methods: ['GET', 'POST']), ]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Utilisation du Voter pour verifier si l'utilisateur peut creer un item
+        $this->denyAccessUnlessGranted('CREATE_ITEM');
+
         $item = new Item();
         $form = $this->createForm(ItemType::class, $item);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $item->setSeller($this->getUser());
             $entityManager->persist($item);
             $entityManager->flush();
 
@@ -57,12 +70,12 @@ class ItemController extends AbstractController
         ]);
     }
 
-    #[
-        Route('/{id}/edit', name: 'app_item_edit', methods: ['GET', 'POST']),
-        IsGranted("ROLE_ADMIN")
-    ]
+    #[Route('/{id}/edit', name: 'app_item_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
+        // Utilisation du Voter pour verifier si l'utilisateur peut editer cet item
+        $this->denyAccessUnlessGranted('EDIT_DELETE_ITEM', $item);
+
         $form = $this->createForm(ItemType::class, $item);
         $form->handleRequest($request);
 
@@ -78,12 +91,11 @@ class ItemController extends AbstractController
         ]);
     }
 
-    #[
-        Route('/{id}', name: 'app_item_delete', methods: ['POST']),
-        IsGranted("ROLE_ADMIN")
-    ]
+    #[Route('/{id}', name: 'app_item_delete', methods: ['POST']), ]
     public function delete(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
+        // Utilisation du Voter pour verifier si l'utilisateur peut supprimer cet item
+        $this->denyAccessUnlessGranted('EDIT_DELETE_ITEM', $item);
         if ($this->isCsrfTokenValid('delete' . $item->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($item);
             $entityManager->flush();

@@ -27,14 +27,11 @@ class Item
     #[ORM\Column]
     private ?int $category = null;
 
-    #[ORM\ManyToOne(inversedBy: 'items')]
-    private ?User $createdBy = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
-    #[ORM\ManyToOne(inversedBy: 'createdobjects')]
-    private ?User $creator = null;
+    #[ORM\ManyToOne(inversedBy: 'itemsToSell')]
+    private ?User $seller = null;
 
     public function getId(): ?int
     {
@@ -101,19 +98,14 @@ class Item
         return $this;
     }
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(name="creator_id", referencedColumnName="id", nullable=false)
-     */
-
-    public function getCreator(): ?User
+    public function getSeller(): ?User
     {
-        return $this->creator;
+        return $this->seller;
     }
 
-    public function setCreator(?User $creator): static
+    public function setSeller(?User $seller): static
     {
-        $this->creator = $creator;
+        $this->seller = $seller;
 
         return $this;
     }
