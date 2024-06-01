@@ -2,13 +2,15 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Item;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixture extends Fixture implements FixtureGroupInterface
+// php bin/console doctrine:fixture:load
+
+class UserItemFixture extends Fixture
 {
     public function __construct(
 
@@ -59,12 +61,40 @@ class UserFixture extends Fixture implements FixtureGroupInterface
 
         }
 
+        #seller
+        for ($i = 0; $i < 3; $i++) {
+            $seller = new User();
+            $seller->setEmail("seller$i@gmail.com");
+            $seller->setPassword($this->hasher->hashPassword($seller,'seller'));
+            $seller->setFirstName('Seller');
+            $seller->setLastName('SELLER');
+            $seller->setRoles(['ROLE_SELLER']);
+            $manager->persist($seller);
+
+        }
+
         $manager->flush();
-    }
 
+        $data = [
+            ['name' => 'Chaise de bureau', 'description' => 'Chaise de bureau inclinable en cuir', 'price' => 140, 'category' => 1, 'photo' => null, 'seller' => 'seller0@gmail.com'],
+            ['name' => 'Bureau luxe', 'description' => "Bureau en bois d'acajou massif", 'price' => 1200, 'category' => 2, 'photo' => null, 'seller' => 'seller0@gmail.com'],
+            ['name' => 'Affiche déco', 'description' => 'Affiche décoration echelle de scoville', 'price' => 20, 'category' => 1, 'photo' => null, 'seller' => 'seller1@gmail.com'],
+            ['name' => 'Néon déco', 'description' => 'Applique néon murale', 'price' => 90, 'category' => 1, 'photo' => null, 'seller' => 'seller1@gmail.com'],
+            ['name' => "Boucle d'oreilles Vivienne Westwood", 'description' => 'Petit modèle en or', 'price' => 180, 'category' => 2, 'photo' => null, 'seller' => 'seller2@gmail.com'],
+        ];
 
-    public static function getGroups(): array
-    {
-        return ['user'];
+        foreach ($data as $itemData) {
+            $item = new Item();
+            $item->setName($itemData['name']);
+            $item->setDescription($itemData['description']);
+            $item->setPrice($itemData['price']);
+            $item->setCategory($itemData['category']);
+            $item->setPhoto($itemData['photo']);
+            $seller = $manager->getRepository(User::class)->findOneBy(['email' => $itemData['seller']]);
+            $item->setSeller($seller);
+            $manager->persist($item);
+        }
+
+        $manager->flush();
     }
 }

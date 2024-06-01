@@ -55,6 +55,7 @@ class CartController extends AbstractController
 
 
     }
+
     #[Route('/remove/{id}',name:'_remove')]
     public function remove(Item $item,SessionInterface $session)
     {
@@ -69,14 +70,11 @@ class CartController extends AbstractController
             }
         }
 
-
         $session->set('cart',$cart);
 
         return $this->redirectToRoute('app_cart_index');
-
-
-
     }
+
     #[Route('/delete/{id}',name:'_delete')]
     public function delete(Item $item,SessionInterface $session)
     {
@@ -91,19 +89,14 @@ class CartController extends AbstractController
         $session->set('cart',$cart);
 
         return $this->redirectToRoute('app_cart_index');
-
-
-
     }
+
     #[Route('/empty',name:'_empty')]
     public function empty(SessionInterface $session)
     {
         $session->remove('cart');
 
         return $this->redirectToRoute('app_cart_index');
-
-
-
     }
 }
 
