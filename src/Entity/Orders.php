@@ -18,6 +18,7 @@ class Orders
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
+
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user;
@@ -28,11 +29,40 @@ class Orders
     #[ORM\OneToMany(targetEntity: OrdersDetails::class, mappedBy: 'orders', cascade: ['persist'], orphanRemoval: true)]
     private Collection $ordersDetails;
 
+    #[ORM\Column(length: 255)]
+    private ?string $paymentMethod = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $cardNumber = null;
+
+    #[ORM\Column]
+    private ?int $cvc = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $expirationDate = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $address = null;
+
+    #[ORM\Column]
+    private ?int $postalCode = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $country = null;
+
+    #[ORM\Column]
+    private ?int $phoneNumber = null;
+
     public function __construct()
     {
         $this->ordersDetails = new ArrayCollection();
         $this->timestamp = new \DateTimeImmutable();
     }
+
+
 
     public function getId(): ?int
     {
@@ -95,6 +125,114 @@ class Orders
                 $ordersDetail->setOrders(null);
             }
         }
+        return $this;
+    }
+
+    public function getPaymentMethod(): ?string
+    {
+        return $this->paymentMethod;
+    }
+
+    public function setPaymentMethod(string $paymentMethod): static
+    {
+        $this->paymentMethod = $paymentMethod;
+
+        return $this;
+    }
+
+    public function getCardNumber(): ?string
+    {
+        return $this->cardNumber;
+    }
+
+    public function setCardNumber(string $cardNumber): static
+    {
+        $this->cardNumber = $cardNumber;
+
+        return $this;
+    }
+
+    public function getCvc(): ?int
+    {
+        return $this->cvc;
+    }
+
+    public function setCvc(int $cvc): static
+    {
+        $this->cvc = $cvc;
+
+        return $this;
+    }
+
+    public function getExpirationDate(): ?string
+    {
+        return $this->expirationDate;
+    }
+
+    public function setExpirationDate(string $expirationDate): static
+    {
+        $this->expirationDate = $expirationDate;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): static
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?int
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(int $postalCode): static
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): static
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): static
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?int
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(int $phoneNumber): static
+    {
+        $this->phoneNumber = $phoneNumber;
+
         return $this;
     }
 }

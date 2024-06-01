@@ -1,0 +1,67 @@
+{# templates/orders/add.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Passer une commande{% endblock %}
+
+{% block body %}
+    <h1>Passer une commande</h1>
+
+    {% if app.flashes('message') %}
+        <div class="alert alert-success">
+            {% for message in app.flashes('message') %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {{ form_start(paymentForm) }}
+    <div class="form-group">
+        {{ form_label(paymentForm.paymentMethod) }}
+        {{ form_widget(paymentForm.paymentMethod, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.paymentMethod) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(paymentForm.cardNumber) }}
+        {{ form_widget(paymentForm.cardNumber, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.cardNumber) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(paymentForm.cvc) }}
+        {{ form_widget(paymentForm.cvc, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.cvc) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(paymentForm.expirationDate) }}
+        {{ form_widget(paymentForm.expirationDate, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.expirationDate) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(paymentForm.address) }}
+        {{ form_widget(paymentForm.address, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.address) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(paymentForm.postalCode) }}
+        {{ form_widget(paymentForm.postalCode, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.postalCode) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(paymentForm.city) }}
+        {{ form_widget(paymentForm.city, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.city) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(paymentForm.country) }}
+        {{ form_widget(paymentForm.country, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.country) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(paymentForm.phoneNumber) }}
+        {{ form_widget(paymentForm.phoneNumber, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(paymentForm.phoneNumber) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Valider la Commande</button>
+    {{ form_end(paymentForm) }}
+{% endblock %}
