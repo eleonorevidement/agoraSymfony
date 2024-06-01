@@ -5,12 +5,13 @@
 {% block body %}
     <script>
         function filterItems(category) {
-            var rows = document.querySelectorAll('#itemsTable .itemRow');
-            rows.forEach(row => {
-                if (category === 'all' || row.getAttribute('data-category') === category) {
-                    row.style.display = ''; // montre la ligne
+            var rows = document.querySelectorAll('.itemCard');
+            rows.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = ''; // affiche la carte
                 } else {
-                    row.style.display = 'none'; // cache la ligne
+                    card.style.display = 'none'; // cache la carte
+
                 }
             });
 
@@ -23,7 +24,7 @@
     </script>
 
     <style>
-        .filter-container{
+        .filter-container {
             margin-top: 60px;
             margin-bottom: 30px;
         }
@@ -33,7 +34,7 @@
             font-size: 20px;
         }
 
-        .filter-btn{
+        .filter-btn {
             color: #0f263e;
             border-color: #0f263e;
         }
@@ -57,41 +58,34 @@
             </div>
         </div>
 
-        <table class="table" id="itemsTable">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>actions</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="row">
             {% for item in items %}
-                <tr class="itemRow" data-category="{{ item.category }}">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.description }}</td>
-                    <td>{{ item.price }}</td>
-                    <td>{{ item.category }}</td>
-                    <td>
-                        <a href="{{ path('app_item_show', {'id': item.id}) }}">show</a>
-                        {% if is_granted('ROLE_ADMIN') or app.user == item.seller and app.user != null %}
-                            <a href="{{ path('app_item_edit', {'id': item.id}) }}">edit</a>
-                        {% endif %}
-                    </td>
-                </tr>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4 itemCard" data-category="{{ item.category }}">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ item.photo }}" class="card-img-top" alt="{{ item.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.description }}</p>
+                            <p class="card-text"><strong>Price:</strong> {{ item.price }}</p>
+                            <p class="card-text"><strong>Category:</strong> {{ item.category }}</p>
+                            <a href="{{ path('app_item_show', {'id': item.id}) }}" class="btn btn-primary">Show</a>
+                            {% if is_granted('ROLE_ADMIN') or (app.user == item.seller and app.user != null) %}
+                                <a href="{{ path('app_item_edit', {'id': item.id}) }}" class="btn btn-secondary">Edit</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             {% else %}
-                <tr>
-                    <td colspan="6">no records found</td>
-                </tr>
+                <div class="col-12">
+                    <p class="text-center">No records found</p>
+                </div>
             {% endfor %}
-            </tbody>
-        </table>
+        </div>
+
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SELLER') %}
-            <a href="{{ path('app_item_new') }}">Create new</a>
+            <div class="text-center mt-4">
+                <a href="{{ path('app_item_new') }}" class="btn btn-success">Create new</a>
+            </div>
         {% endif %}
     </div>
 {% endblock %}
