@@ -9,13 +9,14 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .user-account {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .profile-picture {
@@ -52,6 +53,10 @@
             font-weight: bold;
             color: #333;
         }
+
+        .form-section {
+            margin-top: 20px;
+        }
     </style>
 
     <div class="user-account-container">
@@ -59,7 +64,7 @@
             <h2>User Account</h2>
             {% if user.profilePicture %}
                 <div class="profile-picture">
-                    <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePicture) }}" alt="Profile Picture">
+                    <img src="{{ asset('img/' ~ user.profilePicture) }}" alt="Profile Picture">
                 </div>
             {% else %}
                 <div class="profile-picture">
@@ -80,6 +85,7 @@
                     <span>{{ user.lastName }}</span>
                 </div>
             </div>
+
         </div>
     </div>
 {% endblock %}

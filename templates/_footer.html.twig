@@ -1,0 +1,70 @@
+<style>
+    .footer {
+        background-color: #0f263e;
+        color: #ffe3d1;
+        padding: 40px 20px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .footer a {
+        color: #ffe3d1;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        color: #fd8335;
+    }
+
+    .footer .logo img {
+        height: 40px;
+    }
+
+    .footer .footer-section {
+        margin-bottom: 20px;
+    }
+
+    .footer .footer-section h5 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .footer .social-icons a {
+        margin-right: 15px;
+        font-size: 24px;
+    }
+</style>
+
+<footer class="footer mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 footer-section">
+                <div class="logo">
+                    <img src="{{ asset('img/logo.png') }}" alt="Logo">
+                </div>
+                <p>© 2024 Agora. All rights reserved.</p>
+            </div>
+            <div class="col-md-4 footer-section">
+                <h5>Contactez Nous</h5>
+                <p>Email: agora@lesitequidechire.com</p>
+                <p>Telephone: +123 456 7890</p>
+                <p>Addresse: 10 rue Sextius Michel, Brésil</p>
+            </div>
+            <div class="col-md-4 footer-section">
+                <h5>Liens </h5>
+                <ul class="list-unstyled">
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="{{ path('app_item_index') }}">Catalogue</a></li>
+                    <li><a href="{{ path('app_account') }}">Mon Compte</a></li>
+                </ul>
+                <div class="social-icons mt-3">
+                    <a href="https://www.facebook.com/eceingenieurs/?locale=fr_FR"><i class="bi bi-facebook"></i></a>
+                    <a href="https://github.com/eleonorevidement/agoraSymfony"><i class="bi bi-github"></i></a>
+                    <a href="https://www.instagram.com/eleonorevidement/"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/feed/"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
