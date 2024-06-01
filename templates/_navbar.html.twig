@@ -15,6 +15,10 @@
         color: #fd8335;
     }
 
+    .nav-link:focus {
+        color: #fd8335;
+    }
+
     .btn {
         color: #ffe3d1;
         border: solid 1px #ffe3d1;
@@ -26,9 +30,7 @@
         background-color: #fd8335;
     }
 
-    .email {
-        color: #ffe3d1;
-    }
+
 </style>
 
 <nav class="navbar navbar-expand-lg mb-5">
@@ -36,7 +38,8 @@
         <a class="navbar-brand" href="/">
             <img class="logo" src="{{ asset('img/logo.png') }}" height="50">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -47,7 +50,7 @@
                 <li class="nav-item">
                     {% if is_granted('ROLE_ADMIN') %}
 
-                    <a class="nav-link" href="http://localhost:8000/user/">Utilisateurs</a>
+                        <a class="nav-link" href="http://localhost:8000/user/">Utilisateurs</a>
                     {% endif %}
                 </li>
                 <li class="nav-item">
@@ -57,21 +60,14 @@
                 <li class="nav-item">
                     {% if is_granted('ROLE_SELLER') %}
 
-                    <a class="nav-link" href="{{ path('app_my_items_index') }}">Mes Objets</a>
+                        <a class="nav-link" href="{{ path('app_my_items_index') }}">Mes Objets</a>
                     {% endif %}
                 </li>
                 <li class="nav-item">
 
                     {% if is_granted('ROLE_USER') and not is_granted('ROLE_SELLER') and not is_granted('ROLE_ADMIN') %}
 
-                    <a class="nav-link" href="http://localhost:8000/cart">Panier</a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-                    <a class="nav-link" href="{{ path('app_account') }}">Mon compte</a>
+                        <a class="nav-link" href="http://localhost:8000/cart">Panier <i class="bi bi-cart2"></i></a>
                     {% endif %}
                 </li>
 
@@ -84,8 +80,19 @@
                     <a class="btn btn-outline-secondary" role="button" href="/register">S'inscrire</a>
                     <a class="btn btn-secondary" href="/login">Se connecter</a>
                 {% else %}
-                    <em class="email">{{ app.user.userIdentifier }}</em>
-                    <a class="btn" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ app.user.userIdentifier }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {% if is_granted('ROLE_USER') and not is_granted('ROLE_SELLER') and not is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-item" href="#">Mes commandes</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{{ path('app_account') }}">Mon compte</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                        </ul>
+                    </div>
                 {% endif %}
 			</span>
         </div>
