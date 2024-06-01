@@ -2,15 +2,9 @@
 
 {% block title %}User Account{% endblock %}
 
-{% block stylesheets %}
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: lightblue;
-            margin: 0;
-            padding: 0;
-        }
+{% block body %}
 
+    <style>
         .user-account-container {
             max-width: 800px;
             margin: 20px auto;
@@ -58,24 +52,8 @@
             font-weight: bold;
             color: #333;
         }
-
-        .footer {
-            background-color: dimgrey;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        .footer p {
-            margin: 0;
-        }
     </style>
-{% endblock %}
 
-{% block body %}
     <div class="user-account-container">
         <div class="user-account">
             <h2>User Account</h2>
@@ -103,9 +81,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="footer">
-        <p>&copy; 2024 Agora. Tous droits réservés.</p>
     </div>
 {% endblock %}
