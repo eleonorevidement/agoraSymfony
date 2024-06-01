@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Account{% endblock %}
+
+{% block body %}
+<<<<<<< HEAD
+    <div style="max-width: 1200px; margin: auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: flex;">
+
+        <div style="flex: 2; padding: 20px;">
+            <h2 style="text-align: center; color: #333;">Bonjour, Bienvenue sur votre compte</h2>
+
+            <div style="display: flex; align-items: center; margin-top: 30px;">
+                <div>
+                    {% if user.profilePicture %}
+                        <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePicture) }}" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                    {% else %}
+                        <img src="{{ asset('images/default_profile.png') }}" alt="Default Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                    {% endif %}
+                </div>
+
+                <div style="flex-grow: 1; margin-left: 20px;">
+                    <h3 style="color: #333;">Informations</h3>
+                    <div style="margin-bottom: 10px;">
+                        <label style="font-weight: bold;">Email:</label>
+                        <span>{{ user.email }}</span>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label style="font-weight: bold;">Prénom:</label>
+                        <span>{{ user.firstName }}</span>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label style="font-weight: bold;">Nom:</label>
+                        <span>{{ user.lastName }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <h3 style="color: #333;">Coordonnées de livraison</h3>
+                <form>
+                    <div style="margin-bottom: 10px;">
+                        <label for="fullName">Nom et Prénom:</label>
+                        <input type="text" id="fullName" name="fullName" style="width: 100%;">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label for="address1">Adresse Ligne 1:</label>
+                        <input type="text" id="address1" name="address1" style="width: 100%;">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label for="address2">Adresse Ligne 2:</label>
+                        <input type="text" id="address2" name="address2" style="width: 100%;">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label for="city">Ville:</label>
+                        <input type="text" id="city" name="city" style="width: 100%;">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label for="postalCode">Code Postal:</label>
+                        <input type="text" id="postalCode" name="postalCode" style="width: 100%;">
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <label for="phone">N° de téléphone:</label>
+                        <input type="text" id="phone" name="phone" style="width: 100%;">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div style="flex: 1; padding: 20px; background-color: #e0e0e0; border-radius: 10px; margin-left: 20px;">
+            <h3 style="color: #333;">Moyen de paiement</h3>
+            <form>
+                <div style="margin-bottom: 10px;">
+                    <label for="paymentType">Type de carte paiement:</label><br>
+                    <input type="checkbox" id="visa" name="paymentType" value="Visa"> <label for="visa">Visa</label><br>
+                    <input type="checkbox" id="mastercard" name="paymentType" value="Mastercard"> <label for="mastercard">Mastercard</label><br>
+                    <input type="checkbox" id="amex" name="paymentType" value="American Express"> <label for="amex">American Express</label><br>
+                    <input type="checkbox" id="paypal" name="paymentType" value="Paypal"> <label for="paypal">Paypal</label>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="cardNumber">N° de carte:</label>
+                    <input type="text" id="cardNumber" name="cardNumber" style="width: 100%;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="cardName">Nom sur la carte:</label>
+                    <input type="text" id="cardName" name="cardName" style="width: 100%;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="expiryDate">Date d'expiration:</label>
+                    <input type="text" id="expiryDate" name="expiryDate" style="width: 100%;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="securityCode">Code de sécurité:</label>
+                    <input type="text" id="securityCode" name="securityCode" style="width: 100%;">
+                </div>
+            </form>
+
+            <h3 style="color: #333; margin-top: 20px;">Articles achetés</h3>
+
+        </div>
+
+=======
+
+    <style>
+        .user-account-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .user-account {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-picture {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .user-info div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .user-info div strong {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+
+    <div class="user-account-container">
+        <div class="user-account">
+            <h2>User Account</h2>
+            {% if user.profilePicture %}
+                <div class="profile-picture">
+                    <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePicture) }}" alt="Profile Picture">
+                </div>
+            {% else %}
+                <div class="profile-picture">
+                    <img src="{{ asset('img/profilePicture.png') }}" alt="Default Profile Picture">
+                </div>
+            {% endif %}
+            <div class="user-info">
+                <div>
+                    <strong>Email:</strong>
+                    <span>{{ user.email }}</span>
+                </div>
+                <div>
+                    <strong>First Name:</strong>
+                    <span>{{ user.firstName }}</span>
+                </div>
+                <div>
+                    <strong>Last Name:</strong>
+                    <span>{{ user.lastName }}</span>
+                </div>
+            </div>
+        </div>
+>>>>>>> origin/master
+    </div>
+{% endblock %}
