@@ -3,37 +3,95 @@
 {% block title %}Item index{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1 class="mb-4">Item index</h1>
+    <script>
+        function filterItems(category) {
+            var rows = document.querySelectorAll('#itemsTable .itemRow');
+            rows.forEach(row => {
+                if (category === 'all' || row.getAttribute('data-category') === category) {
+                    row.style.display = ''; // montre la ligne
+                } else {
+                    row.style.display = 'none'; // cache la ligne
+                }
+            });
 
-        <div class="row">
-            {% for item in items %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card h-100">
-                        <img src="{{ item.photo }}" class="card-img-top" alt="{{ item.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item.name }}</h5>
-                            <p class="card-text">{{ item.description }}</p>
-                            <p class="card-text"><strong>Price:</strong> {{ item.price }}</p>
-                            <p class="card-text"><strong>Category:</strong> {{ item.category }}</p>
-                            <a href="{{ path('app_item_show', {'id': item.id}) }}" class="btn btn-primary btn-sm">Show</a>
-                            {% if is_granted('ROLE_ADMIN') or app.user == item.seller and app.user != null %}
-                                <a href="{{ path('app_item_edit', {'id': item.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <div class="col-12">
-                    <p class="text-center">No records found</p>
-                </div>
-            {% endfor %}
+            // Gestion des classes actives sur les boutons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active-filter');
+            });
+            document.querySelector('#filter' + (category === 'all' ? 'All' : category)).classList.add('active-filter');
+        }
+    </script>
+
+    <style>
+        .filter-container{
+            margin-top: 60px;
+            margin-bottom: 30px;
+        }
+
+        .filter-title {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .filter-btn{
+            color: #0f263e;
+            border-color: #0f263e;
+        }
+
+        .active-filter {
+            background-color: #fd8335;
+            color: #0f263e;
+            border-color: #fd8335;
+        }
+    </style>
+    <div class="container">
+        <h1>Liste des articles à vendre</h1>
+
+        <div class="filter-container">
+            <div class="filter-title">Filtres de catégorie :</div>
+            <div>
+                <button id="filterAll" class="btn filter-btn" onclick="filterItems('all')">All Categories</button>
+                <button id="filter1" class="btn filter-btn" onclick="filterItems('1')">Category 1</button>
+                <button id="filter2" class="btn filter-btn" onclick="filterItems('2')">Category 2</button>
+                <button id="filter3" class="btn filter-btn" onclick="filterItems('3')">Category 3</button>
+            </div>
         </div>
 
+        <table class="table" id="itemsTable">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                <tr class="itemRow" data-category="{{ item.category }}">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>
+                        <a href="{{ path('app_item_show', {'id': item.id}) }}">show</a>
+                        {% if is_granted('ROLE_ADMIN') or app.user == item.seller and app.user != null %}
+                            <a href="{{ path('app_item_edit', {'id': item.id}) }}">edit</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SELLER') %}
-            <div class="text-center mt-4">
-                <a href="{{ path('app_item_new') }}" class="btn btn-success">Create new</a>
-            </div>
+            <a href="{{ path('app_item_new') }}">Create new</a>
         {% endif %}
     </div>
 {% endblock %}
