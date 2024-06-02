@@ -36,7 +36,7 @@ class Orders
     private ?string $cardNumber = null;
 
     #[ORM\Column]
-    private ?int $cvc = null;
+    private ?int $cvv = null;
 
     #[ORM\Column(length: 255)]
     private ?string $expirationDate = null;
@@ -152,14 +152,14 @@ class Orders
         return $this;
     }
 
-    public function getCvc(): ?int
+    public function getCvv(): ?int
     {
-        return $this->cvc;
+        return $this->cvv;
     }
 
-    public function setCvc(int $cvc): static
+    public function setCvv(int $cvv): static
     {
-        $this->cvc = $cvc;
+        $this->cvv = $cvv;
 
         return $this;
     }

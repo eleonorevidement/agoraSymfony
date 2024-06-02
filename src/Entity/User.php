@@ -44,6 +44,68 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilePicture = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $paymentMethod = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $cardNumber = null;
+
+    #[ORM\Column]
+    private ?int $cvv = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $expirationDate = null;
+
+
+
+
+    public function getPaymentMethod(): ?string
+    {
+        return $this->paymentMethod;
+    }
+
+    public function setPaymentMethod(string $paymentMethod): static
+    {
+        $this->paymentMethod = $paymentMethod;
+
+        return $this;
+    }
+
+    public function getCardNumber(): ?string
+    {
+        return $this->cardNumber;
+    }
+
+    public function setCardNumber(string $cardNumber): static
+    {
+        $this->cardNumber = $cardNumber;
+
+        return $this;
+    }
+
+    public function getCvv(): ?int
+    {
+        return $this->cvv;
+    }
+
+    public function setCvv(int $cvv): static
+    {
+        $this->cvv = $cvv;
+
+        return $this;
+    }
+
+    public function getExpirationDate(): ?string
+    {
+        return $this->expirationDate;
+    }
+
+    public function setExpirationDate(string $expirationDate): static
+    {
+        $this->expirationDate = $expirationDate;
+
+        return $this;
+    }
 
     /**
      * @var Collection<int, Item>
@@ -59,6 +121,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $country = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
@@ -78,7 +143,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->id;
     }
-
 
 
 
@@ -251,6 +315,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCity(?string $city): static
     {
         $this->city = $city;
+
+        return $this;
+    }
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): static
+    {
+        $this->country = $country;
 
         return $this;
     }

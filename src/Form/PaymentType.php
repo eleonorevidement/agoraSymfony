@@ -25,7 +25,7 @@ class PaymentType extends AbstractType
                 'label' => 'Moyen de paiement'
             ])
             ->add('cardNumber', TextType::class)
-            ->add('cvc', TextType::class)
+            ->add('cvv', TextType::class)
             ->add('expirationDate', TextType::class)
             ->add('address', TextType::class)
             ->add('postalCode', TextType::class)
