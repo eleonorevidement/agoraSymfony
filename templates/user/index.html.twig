@@ -4,13 +4,13 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h1 class="mb-4">User index</h1>
+        <h1 class="mb-4">Liste des utilisateurs</h1>
 
         <div class="row">
             {% for user in users %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                     <div class="card h-100">
-                        <img src="{{ user.profilePicture }}" class="card-img-top" alt="{{ user.firstName }} {{ user.lastName }}">
+                        <img src="{{ user.profilePicture ? asset('uploads/profilePicture/' ~ user.profilePicture) : asset('img/profilePicture.png') }}" class="card-img-top" alt="{{ user.firstName }} {{ user.lastName }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
                             <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>

@@ -62,15 +62,9 @@
     <div class="user-account-container">
         <div class="user-account">
             <h2>User Account</h2>
-            {% if user.profilePicture %}
                 <div class="profile-picture">
-                    <img src="{{ asset('img/' ~ user.profilePicture) }}" alt="Profile Picture">
+                    <img src="{{ user.profilePicture ? asset('uploads/profilePicture/' ~ user.profilePicture) : asset('img/profilePicture.png') }}" alt="{{ user.firstName }} {{ user.lastName }}">
                 </div>
-            {% else %}
-                <div class="profile-picture">
-                    <img src="{{ asset('img/profilePicture.png') }}" alt="Default Profile Picture">
-                </div>
-            {% endif %}
             <div class="user-info">
                 <div>
                     <strong>Email:</strong>

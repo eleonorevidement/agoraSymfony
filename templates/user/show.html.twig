@@ -63,7 +63,7 @@
         <div class="user-account">
             <h2>User Account</h2>
             <div class="profile-picture">
-                <img src="{{ user.profilePicture ? asset('img/' ~ user.profilePicture) : asset('img/profilePicture.png') }}" alt="{{ user.firstName }} {{ user.lastName }}">
+                <img src="{{ user.profilePicture ? asset('uploads/profilePicture/' ~ user.profilePicture) : asset('img/profilePicture.png') }}" alt="{{ user.firstName }} {{ user.lastName }}">
             </div>
             <div class="user-info">
                 <div>
