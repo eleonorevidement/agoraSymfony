@@ -3,10 +3,26 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <h1>Mofifier vos informations</h1>
+    <style>
+        .container {
+            flex: 1;
+        }
 
-    {{ include('account/_form.html.twig', {'button_label': 'Update'}) }}
+        .btn {
+            width: fit-content;
+        }
 
-    <a href="{{ path('app_account_index') }}">Retour</a>
+        .btn-perso {
+            background-color: #0f263e;
+        }
 
+    </style>
+
+    <a class="btn mx-4 btn-perso" href="{{ path('app_account_index') }}">Retour</a>
+    <div class="container">
+        <h1>Modifier vos informations</h1>
+        {{ include('account/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+
+    </div>
 {% endblock %}

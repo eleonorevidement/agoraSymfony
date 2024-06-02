@@ -12,10 +12,16 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: flex;
+            flex-direction: column;
             gap: 20px;
         }
 
+        .info-container {
+            display: flex;
+        }
+
         .column {
+            margin-inline: 10px;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
@@ -63,78 +69,82 @@
             color: #333;
         }
 
+        .btn-perso {
+            background-color: #0f263e;
+        }
+
     </style>
 
     <div class="user-account-container">
-
-        <div class="column">
-            <div class="user-account">
-                <h2>User Account</h2>
-                <div class="profile-picture">
-                    <img src="{{ user.profilePicture ? asset('uploads/profilePicture/' ~ user.profilePicture) : asset('img/profilePicture.png') }}" alt="{{ user.firstName }} {{ user.lastName }}">
-                </div>
-                <div class="user-info">
-                    <div>
-                        <strong>Email:</strong>
-                        <span>{{ user.email }}</span>
+        <div class="info-container">
+            <div class="column">
+                <div class="user-account">
+                    <h2>User Account</h2>
+                    <div class="profile-picture">
+                        <img src="{{ user.profilePicture ? asset('uploads/profilePicture/' ~ user.profilePicture) : asset('img/profilePicture.png') }}" alt="{{ user.firstName }} {{ user.lastName }}">
                     </div>
-                    <div>
-                        <strong>First Name:</strong>
-                        <span>{{ user.firstName }}</span>
-                    </div>
-                    <div>
-                        <strong>Last Name:</strong>
-                        <span>{{ user.lastName }}</span>
+                    <div class="user-info">
+                        <div>
+                            <strong>Email:</strong>
+                            <span>{{ user.email }}</span>
+                        </div>
+                        <div>
+                            <strong>First Name:</strong>
+                            <span>{{ user.firstName }}</span>
+                        </div>
+                        <div>
+                            <strong>Last Name:</strong>
+                            <span>{{ user.lastName }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="column">
-            <h2>Address Information</h2>
-            <div class="address-info">
-                <div>
-                    <strong>Address:</strong>
-                    <span>{{ user.address }}</span>
-                </div>
-                <div>
-                    <strong>City:</strong>
-                    <span>{{ user.city }}</span>
-                </div>
-                <div>
-                    <strong>Country:</strong>
-                    <span>{{ user.country }}</span>
-                </div>
-                <div>
-                    <strong>Postal Code:</strong>
-                    <span>{{ user.zipcode }}</span>
+            <div class="column">
+                <h2>Address Information</h2>
+                <div class="address-info">
+                    <div>
+                        <strong>Address:</strong>
+                        <span>{{ user.address }}</span>
+                    </div>
+                    <div>
+                        <strong>City:</strong>
+                        <span>{{ user.city }}</span>
+                    </div>
+                    <div>
+                        <strong>Country:</strong>
+                        <span>{{ user.country }}</span>
+                    </div>
+                    <div>
+                        <strong>Postal Code:</strong>
+                        <span>{{ user.zipcode }}</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="column">
-            <h2>Payment Information</h2>
-            <div class="payment-info">
-                <div>
-                    <strong>Payment Method:</strong>
-                    <span>{{ user.paymentMethod }}</span>
+            <div class="column">
+                <h2>Payment Information</h2>
+                <div class="payment-info">
+                    <div>
+                        <strong>Payment Method:</strong>
+                        <span>{{ user.paymentMethod }}</span>
+                    </div>
+                    <div>
+                        <strong>Card Number:</strong>
+                        <span>{{ user.cardNumber }}</span>
+                    </div>
+                    <div>
+                        <strong>Expiry Date:</strong>
+                        <span>{{ user.expirationDate }}</span>
+                    </div>
+                    <div>
+                        <strong>CVV:</strong>
+                        <span>{{ user.cvv }}</span>
+                    </div>
                 </div>
-                <div>
-                    <strong>Card Number:</strong>
-                    <span>{{ user.cardNumber }}</span>
-                </div>
-                <div>
-                    <strong>Expiry Date:</strong>
-                    <span>{{ user.expirationDate }}</span>
-                </div>
-                <div>
-                    <strong>CVV:</strong>
-                    <span>{{ user.cvv }}</span>
-                </div>
-                <div><a href="{{ path('app_account_edit', {'id': user.id}) }}" class="btn btn-info ">Modifier</a></div>
+
             </div>
-
         </div>
-
+        <a href="{{ path('app_account_edit', {'id': user.id}) }}" class="btn btn-perso ">Modifier</a>
     </div>
 
 {% endblock %}
