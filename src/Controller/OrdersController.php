@@ -40,7 +40,7 @@ class OrdersController extends AbstractController
             $paymentData = $paymentForm->getData();
             $order->setPaymentMethod($paymentData['paymentMethod']);
             $order->setCardNumber($paymentData['cardNumber']);
-            $order->setCvc($paymentData['cvc']);
+            $order->setCvv($paymentData['cvv']);
             $order->setExpirationDate($paymentData['expirationDate']);
             $order->setAddress($paymentData['address']);
             $order->setPostalCode($paymentData['postalCode']);

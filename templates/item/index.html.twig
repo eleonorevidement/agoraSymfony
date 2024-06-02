@@ -40,6 +40,10 @@
 
         }
 
+        .btn-perso {
+            background-color: #0f263e;
+        }
+
         .active-filter {
             background-color: #fd8335;
             color: #0f263e;
@@ -70,7 +74,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ item.name }}</h5>
                             <p class="card-text">{{ item.description }}</p>
-                            <p class="card-text"><strong>Categorie:</strong>
+                            <p class="card-text"><strong>Catégorie :</strong>
                                 <td>
                                     {% if item.category == 1 %}
                                         Régulier
@@ -84,9 +88,9 @@
                                 </td></p>
                             <p class="card-text"><h3>Prix:</h3> <p class="prix">{{ item.price }}€</p></p>
 
-                            <a href="{{ path('app_item_show', {'id': item.id}) }}" class="btn btn-primary">Show</a>
+                            <a href="{{ path('app_item_show', {'id': item.id}) }}" class="btn btn-perso">Voir</a>
                             {% if is_granted('ROLE_ADMIN') or (app.user == item.seller and app.user != null) %}
-                                <a href="{{ path('app_item_edit', {'id': item.id}) }}" class="btn btn-secondary">Edit</a>
+                                <a href="{{ path('app_item_edit', {'id': item.id}) }}" class="btn btn-perso">Modifier</a>
                             {% endif %}
                         </div>
                     </div>
@@ -100,7 +104,7 @@
 
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SELLER') %}
             <div class="text-center mt-4">
-                <a href="{{ path('app_item_new') }}" class="btn btn-success">Create new</a>
+                <a href="{{ path('app_item_new') }}" class="btn btn-lg btn-perso">Ajouter un article</a>
             </div>
         {% endif %}
     </div>

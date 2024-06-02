@@ -3,37 +3,49 @@
 {% block title %}Mes commandes{% endblock %}
 
 {% block body %}
-    <h1>Mes commandes</h1>
+    <style>
+        .container {
+            flex: 1;
+        }
+    </style>
 
-    {% if orders is empty %}
-        <p>Vous n'avez pas encore passé de commandes.</p>
-    {% else %}
-        <table>
-            <thead>
-            <tr>
-                <th>Référence</th>
-                <th>Date</th>
-                <th>Détails</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for order in orders %}
+    <div class="container">
+        <h1>Mes commandes</h1>
+
+
+        {% if orders is empty %}
+            <p>Vous n'avez pas encore passé de commandes.</p>
+        {% else %}
+            <table class="table table-hover">
+                <thead class="thead-dark">
                 <tr>
-                    <td>{{ order.reference }}</td>
-                    <td>{{ order.timestamp|date('d/m/Y H:i') }}</td>
-                    <td>
-                        <ul>
-                            {% for detail in order.ordersDetails %}
-                                <li>{{ detail.item.name }} x {{ detail.quantity }} - {{ detail.price }} €</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>Payment Method: {{ order.paymentMethod }}</td>
-                    <td>Card Number: {{ order.cardNumber }}  CVV: {{ order.cvv }}</td>
-                    <td>Address: {{ order.address }}  Postal Code: {{ order.postalCode }}</td>
+                    <th>Référence</th>
+                    <th>Date</th>
+                    <th>Détails</th>
+                    <th>Méthode de Paiement</th>
+                    <th>Numéro de Carte</th>
+                    <th>Adresse</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.reference }}</td>
+                        <td>{{ order.timestamp|date('d/m/Y H:i') }}</td>
+                        <td>
+                            <ul>
+                                {% for detail in order.ordersDetails %}
+                                    <li>{{ detail.item.name }} x {{ detail.quantity }} - {{ detail.price }} €</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ order.paymentMethod }}</td>
+                        <td>{{ order.cardNumber | slice(0, 4) }}{{ '********' }}{{ order.cardNumber | slice(-4) }}</td>
+                        <td>{{ order.address }}, {{ order.postalCode }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
 {% endblock %}
