@@ -3,6 +3,11 @@
 {% block title %}Item{% endblock %}
 
 {% block body %}
+    <style>
+        .prix{
+            font-size: 25px;
+        }
+    </style>
     <div class="container mt-5">
         <h1 class="mb-4">Item</h1>
 
@@ -19,12 +24,18 @@
                         <td>{{ item.description }}</td>
                     </tr>
                     <tr>
-                        <th>Prix</th>
-                        <td>{{ item.price }}</td>
-                    </tr>
-                    <tr>
                         <th>Categorie</th>
-                        <td>{{ item.category }}</td>
+                        <td>
+                            {% if item.category == 1 %}
+                                Régulier
+                                {% elseif item.category == 2 %}
+                                Haut de Gamme
+                                {% elseif item.category == 3 %}
+                                Rare
+                            {% else %}
+                                Inconnu
+                            {% endif %}
+                        </td>
                     </tr>
                     <tr>
                         <th>Vendeur</th>
@@ -33,6 +44,10 @@
                         {% else %}
                             <td>-</td>
                         {% endif %}
+                    </tr>
+                    <tr>
+                        <th class="prix">Prix</th>
+                        <td class="prix">{{ item.price }}€</td>
                     </tr>
                     </tbody>
                 </table>

@@ -37,12 +37,16 @@
         .filter-btn {
             color: #0f263e;
             border-color: #0f263e;
+
         }
 
         .active-filter {
             background-color: #fd8335;
             color: #0f263e;
             border-color: #fd8335;
+        }
+        .prix{
+            font-size: 25px;
         }
     </style>
     <div class="container">
@@ -51,10 +55,10 @@
         <div class="filter-container">
             <div class="filter-title">Filtres de catégorie :</div>
             <div>
-                <button id="filterAll" class="btn filter-btn" onclick="filterItems('all')">All Categories</button>
-                <button id="filter1" class="btn filter-btn" onclick="filterItems('1')">Category 1</button>
-                <button id="filter2" class="btn filter-btn" onclick="filterItems('2')">Category 2</button>
-                <button id="filter3" class="btn filter-btn" onclick="filterItems('3')">Category 3</button>
+                <button id="filterAll" class="btn filter-btn" onclick="filterItems('all')">Toutes Categories</button>
+                <button id="filter1" class="btn filter-btn" onclick="filterItems('1')">Régulier</button>
+                <button id="filter2" class="btn filter-btn" onclick="filterItems('2')">Haut de gamme</button>
+                <button id="filter3" class="btn filter-btn" onclick="filterItems('3')">Rare</button>
             </div>
         </div>
 
@@ -66,8 +70,20 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ item.name }}</h5>
                             <p class="card-text">{{ item.description }}</p>
-                            <p class="card-text"><strong>Price:</strong> {{ item.price }}</p>
-                            <p class="card-text"><strong>Category:</strong> {{ item.category }}</p>
+                            <p class="card-text"><strong>Categorie:</strong>
+                                <td>
+                                    {% if item.category == 1 %}
+                                        Régulier
+                                    {% elseif item.category == 2 %}
+                                        Haut de Gamme
+                                    {% elseif item.category == 3 %}
+                                        Rare
+                                    {% else %}
+                                        Inconnu
+                                    {% endif %}
+                                </td></p>
+                            <p class="card-text"><h3>Prix:</h3> <p class="prix">{{ item.price }}€</p></p>
+
                             <a href="{{ path('app_item_show', {'id': item.id}) }}" class="btn btn-primary">Show</a>
                             {% if is_granted('ROLE_ADMIN') or (app.user == item.seller and app.user != null) %}
                                 <a href="{{ path('app_item_edit', {'id': item.id}) }}" class="btn btn-secondary">Edit</a>
