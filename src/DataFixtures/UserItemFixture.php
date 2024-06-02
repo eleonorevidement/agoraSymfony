@@ -76,11 +76,11 @@ class UserItemFixture extends Fixture
         $manager->flush();
 
         $data = [
-            ['name' => 'Chaise de bureau', 'description' => 'Chaise de bureau inclinable en cuir', 'price' => 140, 'category' => 1, 'photo' => null, 'seller' => 'seller0@gmail.com'],
-            ['name' => 'Bureau luxe', 'description' => "Bureau en bois d'acajou massif", 'price' => 1200, 'category' => 2, 'photo' => null, 'seller' => 'seller0@gmail.com'],
-            ['name' => 'Affiche déco', 'description' => 'Affiche décoration echelle de scoville', 'price' => 20, 'category' => 1, 'photo' => null, 'seller' => 'seller1@gmail.com'],
-            ['name' => 'Néon déco', 'description' => 'Applique néon murale', 'price' => 90, 'category' => 1, 'photo' => null, 'seller' => 'seller1@gmail.com'],
-            ['name' => "Boucle d'oreilles Vivienne Westwood", 'description' => 'Petit modèle en or', 'price' => 180, 'category' => 2, 'photo' => null, 'seller' => 'seller2@gmail.com'],
+            ['name' => 'Chaise de bureau', 'description' => 'Chaise de bureau inclinable en cuir', 'price' => 140, 'category' => 1, 'photo' => 'chaise.jpg', 'seller' => 'seller0@gmail.com'],
+            ['name' => 'Bureau luxe', 'description' => "Bureau en bois d'acajou massif", 'price' => 1200, 'category' => 2, 'photo' => 'bureau.jpg', 'seller' => 'seller0@gmail.com'],
+            ['name' => 'Affiche déco', 'description' => 'Affiche décoration echelle de scoville', 'price' => 20, 'category' => 1, 'photo' => 'affiche.jpg', 'seller' => 'seller1@gmail.com'],
+            ['name' => 'Néon déco', 'description' => 'Applique néon murale', 'price' => 90, 'category' => 1, 'photo' => 'neon.jpg', 'seller' => 'seller1@gmail.com'],
+            ['name' => "Boucle d'oreilles Vivienne Westwood", 'description' => 'Petit modèle en or', 'price' => 180, 'category' => 2, 'photo' => 'boucles.jpg', 'seller' => 'seller2@gmail.com'],
         ];
 
         foreach ($data as $itemData) {
