@@ -14,10 +14,9 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\UserRepository;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-
+#[Route('/account')]
 class AccountController extends AbstractController
 {
-    #[Route('/account')]
     #[Route('/', name: 'app_account')]
     public function index(UserRepository $userRepository): Response
     {
